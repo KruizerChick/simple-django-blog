@@ -1,0 +1,3 @@
+# Requirements for PRODUCTION environment only
+
+-r base.txt

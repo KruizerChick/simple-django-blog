@@ -1,0 +1,8 @@
+# Requirements for ALL environments
+
+Django>=2.0
+psycopg2
+
+django-allauth
+django-compressor
+django-taggit
