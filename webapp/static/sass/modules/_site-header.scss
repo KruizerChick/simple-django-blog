@@ -4,122 +4,79 @@
 /* Three sections:  Logo, Menu, Contact */
 
 .site-header {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
+  padding: 10px 0;
   position: absolute;
   width: 100%;
-  z-index: 3;
+  z-index: 10;
   transition: background-color .3s ease-out;
-  
 
-  /* Allows different header color on larger screens */
   &--is-expanded {
-    background-color: rgba($primary-color-2, .55);
+    background-color: $primary-color-2;
   }
 
   @include atSmall {
-    /* visibility: visible; */
+    visibility: visible;
     flex-flow: row nowrap;
   }
 
   @include atMedium {
     position: fixed;
-    justify-content: center;
-    align-items: center;
     background-color: $primary-color-2;
-    color: #fff;
-    /* max-height: 72px; */
 
-  /* To change header colors as page is scrolled */
     &--dark {
       background-color: rgba($primary-color-2, .9);
     }
   }
 
-  /* Logo Section */
   &__logo {
     order: 1;
-    flex: 1 1 auto;
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translateX(-50%) scale(.8);
+    transform: translateX(-50%) scale(.6);
     transition: transform .3s ease-out;
     transform-origin: 50% 0%;
+    background-color: $primary-color-3;
+    padding: .25rem;
+    font-size: 1.5em;
 
-    @include atSmall {
-      position: relative;
-      top: 0;
-      left: 0;
-      margin: 1px 0 1px 2rem;
-      transform: translateX(0) scale(1);
-    }
-  }
-
-  &__logo__graphic icon {
-    text-indent: -9999px;
-  }
-
-  /* Menu/Navigation Section */
-  &__menu {
-    order: 2;
-    flex: 2 1 auto;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-
-    @include atSmall {
-      flex-flow: row nowrap;
-    }
-  }
-
-  &__menu-content {
-    order: 2;
-    flex: 2 1 auto;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    text-align: center;
-
-    opacity: 0;
-    transform: scale(1.2);
-    transition: all .3s ease-out;
-    position: relative;
-    z-index: -10;
-    text-align: center;
-
-    @include atSmall {
-      flex-flow: row nowrap;
+    span, a {
+      color: #FFF;
     }
 
     @include atMedium {
-      opacity: 1;
-      z-index: 1;
-      padding-top: 0;
-      transform: scale(1);
+      left: 0;
+      padding: .50rem;
+      transform: translateX(0) scale(.8);
+
+      .site-header--dark & {
+        transform: scale(.66);
+      }
+
+      .new-page & {
+        transform: scale(.66);
+      }
     }
 
-    &--is-visible {
-      opacity: 1;
-      z-index: 5;
-      transform: scale(1);
-      padding: 53px 20px 0 20px;
+    @include atLarge {
+      left: auto;
+      padding: .75rem;
+      transform: translateX(0);
     }
   }
 
+  /*&__logo__graphic {
+    text-indent: -9999px;
+  }*/
+
+  /* Configures and animates the mobile menu icon */
   &__menu-icon {
-    order: 2;
     width: 20px;
     height: 19px;
     position: absolute;
     z-index: 10;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
 
     &::before {
       content: "";
@@ -128,7 +85,7 @@
       left: 0;
       width: 20px;
       height: 3px;
-      background-color: $primary-color-2;
+      background-color: #FFF;
       transform-origin: 0 0;
       transition: transform .3s ease-out;
     }
@@ -138,7 +95,7 @@
       left: 0;
       width: 20px;
       height: 3px;
-      background-color: $primary-color-2;
+      background-color: #FFF;
       transition: all .3s ease-out;
       transform-origin: 0 50%;
     }
@@ -149,7 +106,7 @@
       left: 0;
       width: 20px;
       height: 3px;
-      background-color: $primary-color-2;
+      background-color: #FFF;
       transform-origin: 0 100%;
       transition: transform .3s ease-out;
     }
@@ -172,21 +129,68 @@
     }
   }
 
-  /* Contact Section */
-  li.btn--config {
-    margin-left: 3rem;
-    padding: 0;
+  /* Actual menu content */
+  &__menu-content {
+    order: 3;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    opacity: 0;
+    transform: scale(1.2);
+    transition: all .3s ease-out;
+    position: relative;
+    z-index: -10;
+    padding-top: 3rem;
+    padding-left: 1.25rem;
+    text-align: center;
 
-    a:hover {
-      background: transparent;
+    @include atSmall {
+      flex-direction: row;
+    }
+
+    @include atMedium {
+      opacity: 1;
+      z-index: 1;
+      padding-top: 0;
+      transform: scale(1);
+    }
+
+    &--is-visible {
+      opacity: 1;
+      z-index: 1;
+      padding-bottom: 2rem;
+      transform: scale(1);
+
+      @include atSmall {
+        padding-bottom: -2rem;
+      }
     }
   }
 
-  li.btn--contact a {
-    display: none;
+  &__placeholder {
+    order: 1;
+    visibility: hidden;
 
     @include atSmall {
-      display: contents;
+      visibility: visible;
+      padding-left: 5rem;
+    }
+  }
+
+  &__navigation {
+    order: 2;
+
+    @include atMedium {
+      padding-top: 0;
+    }
+  }
+
+  &__btn-container {
+    order: 4;
+
+    i {
+      color: #fff;
+      margin-right: 1rem;
     }
   }
 }

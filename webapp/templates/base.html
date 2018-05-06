@@ -20,11 +20,49 @@
   </head>
   <body class="no-margin">
     
-    {% include '_nav_menu.html' %}
+    <div class="site-grid">
+      <!-- {% comment %} 
+      <div class="site-grid-header">
+        {% include '_nav_menu.html' %}
+      </div> 
+      {% endcomment %} -->
 
-    {% block page-content %} {% endblock page-content %}
+      <div class="site-grid-topbar">
+        <div class="top-grid">
 
-    {% include '_footer.html' %}
+          <section class="top-bread">
+            <!-- <div class="breadcrumbs"> -->
+              {% block breadcrumbs %}{% endblock breadcrumbs %}
+            <!-- </div> -->
+          </section>
+
+          <section class="top-alert">
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                  <p>{{ message }}</p>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span class="close" aria-hidden="true">X</span>
+                  </button>
+                </div>
+              {% endfor %}
+            {% endif %}
+            {% block notifications %}{% endblock notifications %}
+          </section>
+
+        </div>
+      </div>
+
+      <div class="site-grid-main">
+        {% block page-content %} {% endblock page-content %}
+      </div>
+    
+      <!-- {% comment %} 
+      <div class="site-grid-footer">
+        {% include '_footer.html' %}
+      </div> 
+      {% endcomment %} -->
+    </div>
 
     <script async src="{% static 'js/project.js'%}"></script>
 
