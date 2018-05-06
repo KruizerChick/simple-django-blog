@@ -1,0 +1,36 @@
+{% load static i18n %}
+
+<!-- Fixed Navigation and menu bar -->
+<header class="site-header">
+  <!-- Header logo -->
+  <div class="site-header__logo">
+    <img class="site-header__logo__graphic" style="width: 228px; height: 81px;"
+          src="{% static 'images/Walzel_logo.jpg' %}" alt="">
+  </div>
+  <!-- Menu section -->
+  <div class="site-header__menu-icon">
+    <div class="site-header__menu-icon__middle"></div>
+  </div>
+  <div class="site-header__menu-content">
+    <div class="site-header__placeholder"></div>
+    <!-- Navigation bar -->
+    <nav class="nav-primary nav-primary--centered">
+      <ul>
+        <li><a href="{% url 'blog:post_list' %}">{% trans 'Blog' %}</a></li>
+      </ul>
+      {% block nav-links %}{% endblock nav-links %}
+      <!-- User Links -->
+    </nav>
+    
+    <div class="site-header__btn-container">
+      <!-- Admin URL if User is Admin -->
+      {% if request.user.is_superuser %}
+        <a href="{% url 'admin:index' %}">
+          <i class="fa fa-cog fa-lg" aria-hidden="true"></i></a>
+      {% endif %}
+      
+    </div>
+  </div>
+  <!-- End of Menu section -->
+<!-- End of .site.header content -->
+</header>

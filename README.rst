@@ -16,15 +16,13 @@ Features:
 Project structure
 -----------------
 
-Project will have the following directory structure:
-
-```
+Project will have the following directory structure::
 
     <project_slug>
     ├──  config
     │   ├── __init__.py
     │   ├── settings
-    │   │   ├── __init__.py
+    │   │   ├── __init__.py
     │   │   ├── base.py
     │   │   ├── local.py
     │   │   └── production.py
@@ -68,13 +66,11 @@ Project will have the following directory structure:
     ├── README.rst
     ├── web.config
     └── webpack.config.js
-```
+
 
 Docker Commands
 ---------------
-To run commands on the docker container:
+To run commands on the docker container::
 
-```
     docker-compose run web <command>
     
-```

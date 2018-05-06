@@ -1,0 +1,104 @@
+{% extends 'blog/blog_base.html' %}
+{% load blog i18n %}
+
+{% block blog-nav %}
+  <li><a href="{% url 'blog:post_new' %}">{% trans 'New Post' %}</a></li>
+  <li><a href="{% url 'blog:post_draft_list' %}">{% trans 'Drafts' %}</a></li>
+  <li><a href="{% url 'blog:post_list' %}">{% trans 'Post List' %}</a></li>
+{% endblock blog-nav %}
+
+{% block head_title %}
+  <h2 class="section-title">Blog</h2>
+{% endblock head_title %}
+
+{% block content %}
+<div class="blog">
+  <div class="post-detail">
+
+    <div class="post-header">
+      <h1>{{ post.title }}</h1>
+      By <strong>{{ post.author }}</strong>
+      {% if post.published_date %}
+        <p><em>Published: </em> 
+          <strong> {{ post.published_date | date }}</strong> || 
+          <em> Tags: </em>
+          {% for tag in post.tags.all  %}
+            <a class="tags" href="#">{{ tag.name }}</a>
+          {% endfor %}
+        </p> 
+      {% else %}
+        <a class="btn"
+            href="{% url 'blog:post_publish' pk=post.pk %}">Publish</a>
+      {% endif %}
+    </div>
+
+    <div class="post-body">
+      <p>{{ post.text|safe|linebreaksbr }}</p>
+    </div>
+    <div class="post-controls">
+        {% if post.author|truncatewords:1 == user.username|truncatewords:1 %}
+        <a class="btn btn--green" href="{% url 'blog:post_edit' pk=post.pk %}">
+          <i class="fa fa-pencil" aria-hidden="true"></i> Edit</a>
+        <a class="btn btn--black" href="{% url 'blog:post_remove' pk=post.pk %}">
+          <i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+      {% endif %}
+    </div>
+
+   <!-- Comments section for the post -->
+    {% if post.published_date %}
+    <div class="post-comments">
+      <hr>
+      <a class="btn" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add comment</a>
+      <a id="btnComment" class="btn btn--black" href="#popupComment">Add Comment</a>
+      {% for comment in post.comments.all %}
+      <div class="container">
+        {% if post.author|truncatewords:1 == user.username|truncatewords:1 or comment.approved_comment %}
+          <div class="post-controls">
+            <p>
+              From: <strong>{{ comment.author }}</strong>
+               on <em>{{ comment.created_date }}</em>
+              {% if not comment.approved_comment %}
+                ||
+                <a class="btn btn--red" href="{% url 'blog:comment_remove' pk=comment.pk %}">
+                    <i class="fa fa-ban" aria-hidden="true"></i></a>
+                <a class="btn btn--green" href="{% url 'blog:comment_approve' pk=comment.pk %}">
+                  <i class="fa fa-check" aria-hidden="true"></i></a>
+              {% endif %}
+            </p>
+          </div>
+          <div class="comment-text">
+            <p>{{ comment.text|safe|linebreaks }}</p>
+          </div>
+        </div>
+        {% endif %}
+      {% empty %}
+        <p>No comments posted.</p>
+      {% endfor %}
+
+    {% endif %}
+      
+    </div>
+  </div>
+</div>
+
+<!-- Popup items (hidden until called) -->
+<!-- Add Comment -->
+<div id="popupComment" class="overlay">
+  <div class="popup">
+    <a class="popup__close" href="#">X</a>
+    <div class="popup__content">
+      <div class="blog blog-form">
+        <!-- Comment Form -->
+        <h1 class=""> {{ post.title }}</h1>
+        <iframe class="blog-form" src="{% url 'blog:add_comment_to_post' pk=post.pk %}" 
+          width="100%" height="100%">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock content %}
+
+{% block extra %}{% endblock extra %}

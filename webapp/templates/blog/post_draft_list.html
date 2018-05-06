@@ -1,0 +1,49 @@
+{% extends 'blog/blog_base.html' %}
+{% load account blog i18n %}
+
+{% block blog-nav %}
+  <li><a href="{% url 'blog:post_new' %}">{% trans 'New Post' %}</a></li>
+  <li><a href="{% url 'blog:post_list' %}">{% trans 'Published Posts' %}</a></li>
+{% endblock blog-nav %}
+
+{% block head_title %}
+  <h2 class="section-title">Drafts</h2>
+{% endblock head_title %}
+
+{% block content %}
+<div class="blog blog-draft">
+  {% for post in post_list %}
+    <div class="post-list">
+      <div class="post-header">
+        <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <p class="date">Created: {{ post.created_date|date:'d-m-Y' }}</p>
+      </div>
+      <div class="post-body">
+        <p>{{ post.text|truncatechars:200 }}</p>
+      </div>
+    </div>
+    <hr>
+  {% endfor %}
+</div>
+{% endblock content %}
+
+<!-- Sidebar on Blog Drafts page -->
+{% block extra %}
+<div class="blog-extra">
+  <h3>Handy Links</h3>
+  <ul>
+    <li><a href="{% url 'blog:post_feed' %}"
+          title="{% trans "RSS feed of last entries" %}"
+          class="feeds">
+        {% trans "Subscribe to my RSS feed" %}
+      </a></li>
+  </ul>
+    
+  <!-- Posts with Unapproved Comments -->
+  <h3>Unapproved Comments</h3>
+  {% get_unapproved_comments %}
+    
+  <!-- Tag Cloud -->
+
+</div>
+{% endblock extra %}

@@ -11,20 +11,26 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# PATHS and ROOT DIRECTORY CONFIGURATION
+# ------------------------------------------------------------------------------
+# Build paths inside the project like this: os.path.join(ROOT_DIR, ...)
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+BASE_DIR = ROOT_DIR
+# APPS_DIR = os.path.join(ROOT_DIR, 'static'),
+APPS_DIR = os.path.join(ROOT_DIR, 'webapp')
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
+TEMPLATE_DIR = os.path.join(APPS_DIR, 'templates')
+STATIC_DIR = os.path.join(APPS_DIR, 'static')
+MEDIA_DIR = os.path.join(APPS_DIR, 'media')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#u-4r8+)0%&=@-e^g(==e7fld+i(482kb+3!ast07yqb9tv8m*'
 
+# DEBUG
+# ------------------------------------------------------------------------------
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
+# https://docs.djangoproject.com/en/dev/ref/settings/#debug
+DEBUG = os.environ.get('DJANGO_DEBUG', default=True)
 
 
 # APP CONFIGURATION
@@ -59,13 +65,10 @@ THIRD_PARTY_APPS = [
 
     # Blog tagging
     'taggit',
-
-    # Compression
-    'compressor',
 ]
 
 LOCAL_APPS = [
-
+    'webapp.blog',
 ]
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -86,14 +89,33 @@ MIDDLEWARE = [
 ]
 
 
+# URL CONFIGURATION
+# ------------------------------------------------------------------------------
 ROOT_URLCONF = 'config.urls'
 
+
+# MEDIA CONFIGURATION
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+MEDIA_ROOT = MEDIA_DIR
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = '/media/'
+
+
+# TEMPLATE CONFIGURATION
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
+        'DIRS': [TEMPLATE_DIR],
+        # 'APP_DIRS': True,
         'OPTIONS': {
+            'loaders': [
+                'django.template.loaders.filesystem.Loader',
+                'django.template.loaders.app_directories.Loader',
+            ],
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -116,6 +138,18 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+# PASSWORD STORAGE SETTINGS
+# ------------------------------------------------------------------------------
+# See https://docs.djangoproject.com/en/dev/topics/auth/passwords/#using-argon2-with-django
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+    'django.contrib.auth.hashers.BCryptPasswordHasher',
+]
 
 
 # Password validation
@@ -141,17 +175,112 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
 
+# STATIC FILE CONFIGURATION
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = '/static/'
+
+# https://docs.djangoproject.com/en/2.0/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
+STATICFILES_DIRS = [STATIC_DIR, ]
+
+# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
+STATICFILES_FINDERS = [
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    # other finders..
+]
+
+
+# MEDIA
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#media-root
+MEDIA_ROOT = os.path.join(APPS_DIR, 'media')
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#media-url
+MEDIA_URL = '/media/'
+
+
+# FIXTURES
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#fixture-dirs
+# FIXTURE_DIRS = os.path.join(APPS_DIR, 'fixtures')
+
+
+# EMAIL
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
+EMAIL_BACKEND = os.environ.get(
+  'DJANGO_EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+
+
+# AUTHENTICATION
+# ------------------------------------------------------------------------------
+# https://docs.djangoproject.com/en/dev/ref/settings/#authentication-backends
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+# https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
+# AUTH_USER_MODEL = 'users.User'
+# https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
+# LOGIN_REDIRECT_URL = 'users:redirect'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+# https://docs.djangoproject.com/en/dev/ref/settings/#login-url
+LOGIN_URL = 'account_login'
+LOGOUT_URL = 'account_logout'
+
+
+# Third Party settings
+# ==============================================================================
+
+# django-allauth
+# ------------------------------------------------------------------------------
+# See http://django-allauth.readthedocs.io/en/latest/configuration.html
+ACCOUNT_ALLOW_REGISTRATION = os.environ.get(
+  'DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
+
+# Specifies the login method to use: username, e-mail address, or either one of both.
+# Setting this to “email” requires ACCOUNT_EMAIL_REQUIRED=True
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+ACCOUNT_EMAIL_REQUIRED = True
+
+# Options are 'mandatory', 'optional', or 'none';
+# 'mandatory' = User is blocked from logging in until the email address is verified.
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+
+# User enters email twice during signup to avoid typos
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+# An integer specifying the minimum allowed length of a username.
+ACCOUNT_USERNAME_MIN_LENGTH = 4
+# Stores the usernamne in lowercase
+ACCOUNT_PRESERVE_USERNAME_CASING=False
+
+# AUTH_PROFILE_MODULE = "contacts.ContactProfile"
+
+# Taggit
+# ------------------------------------------------------------------------------
+# TAGGIT_TAGS_FROM_STRING = 'family_tree.people.forms.tag_comma_splitter'
+# TAGGIT_STRING_FROM_TAGS = 'family_tree.people.forms.tag_comma_joiner'
+TAGGIT_CASE_INSENSITIVE = True
+
+
+# django-compressor
+# ------------------------------------------------------------------------------
+# https://django-compressor.readthedocs.io/en/latest/quickstart/#installation
+INSTALLED_APPS += ['compressor']
+STATICFILES_FINDERS += ['compressor.finders.CompressorFinder']

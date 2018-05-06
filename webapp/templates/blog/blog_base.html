@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block nav-links %}{% endblock nav-links %}
+
+{% block page-content %}
+
+<div id="blog" class="new-page new-page--red page-section" data-matching-link="#blog-link">
+  <!-- Blog navigation bar -->
+    {% if user.is_authenticated %}
+      <div class="nav-secondary">
+        <ul>
+          {% block blog-nav %}{% endblock blog-nav %}
+        </ul>
+      </div>
+    {% endif %}
+
+    {% block head_title %} {% endblock head_title %}
+  
+  <div class="flex-container">
+      {% block content %} {% endblock content %}
+      {% block extra %}{% endblock extra %}
+  </div>
+</div>
+
+{% endblock page-content %}

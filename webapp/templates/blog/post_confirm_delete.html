@@ -1,0 +1,17 @@
+{% extends 'blog/blog_base.html' %}
+
+{% block head_title %}
+  <h2 class="section-title">Confirm Delete</h2>
+{% endblock head_title %}
+
+{% block content %}
+<div class="flex-container">
+  <div class="form">
+
+    <form action="" method="post">{% csrf_token %}
+      <p>Are you sure you want to delete "{{ object }}"?</p>
+      <input class='btn' type="submit" value="Confirm" />
+    </form>
+  </div>  
+</div>
+{% endblock content %}

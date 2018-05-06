@@ -1,0 +1,26 @@
+{% extends 'blog/blog_base.html' %}
+{% load i18n %}
+
+{% block blog-nav %}
+    <li><a href="{% url 'blog:post_draft_list' %}">{% trans 'Drafts' %}</a></li>
+    <li><a href="{% url 'blog:post_list' %}">{% trans 'Post List' %}</a></li>
+{% endblock blog-nav %}
+
+{% block head_title %}
+    <h2 class="section-title">New Blog Post</h2>
+{% endblock head_title %}
+
+{% block content %}
+    <div class="form">
+        <h1>New post</h1>
+
+        <form method="POST" class="blog-form">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn">Save</button>
+        </form>
+
+        <script>var editor = new MediumEditor('.editable');</script>
+    </div>  
+
+{% endblock content %}
