@@ -1,0 +1,148 @@
+/* =========================
+          SITE GRID
+   ========================= */
+/* Grid settings only; All other styling settings
+    found in specific CSS section (module) */
+
+/* MAIN SITE GRID - TOP LEVEL */
+.site-grid {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  grid-gap: .5rem;
+  grid-template-areas:
+    "header"
+    "topbar"
+    "main"
+    "footer";
+
+  @include atSmall {
+    grid-template-columns: (auto-fit, minmax(100px, 1fr)), auto, (auto-fit, minmax(100px, 1fr));
+    grid-template-rows: 72px auto auto auto;
+    grid-template-areas:
+      "header"
+      "topbar"
+      "main"
+      "footer";
+  }
+}
+
+
+/* Site Heading grid settings */
+.site-grid-header {
+  grid-area: header;
+  overflow: hidden;
+  background: $primary-color-2;
+  color: #fff;
+
+}
+
+.site-grid-topbar {
+  grid-area: topbar;
+  display: none;
+  visibility: collapse;
+
+  @include atMedium {
+    display: contents;
+    visibility: visible;
+  }
+}
+
+.site-grid-main {
+  grid-area: main;
+
+  @include atSmall {
+    min-height: 50%;
+  }
+}
+
+.site-grid-footer {
+  grid-area: footer;
+
+  @include atSmall {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+  }
+}
+
+/* TOP BAR GRID - Child of SITE-GRID-TOPBAR */
+.top-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  grid-template-areas:
+    "bread alert alert";
+}
+
+.top-bread {
+  grid-area: bread;
+}
+
+.top-alert {
+  grid-area: alert;
+}
+
+
+/* MAIN GRID - Child of SITE-GRID-MAIN */
+.main-grid {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  /* grid-gap: 1%; */
+  grid-template-areas:
+    "content"
+    "aside"
+    "sidebar";
+
+  @include atMedium {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: auto;
+    grid-gap: 1%;
+    grid-template-areas:
+    "sidebar content content content aside";
+  }
+}
+
+  .main-content {
+    grid-area: content;
+    align-self: start;
+    margin-top: 1rem;
+    padding: .5rem;
+    
+    &:empty {
+      display: none;
+      visibility: collapse;
+    }
+
+    @include atSmall {
+      margin-top: 0;
+      margin-bottom: 7rem;
+      padding: 0;
+    }
+  }
+
+  .main-sidebar {
+    grid-area: sidebar;
+    display: none;
+    visibility: collapse;
+    height: 0;
+    
+    @include atMedium {
+      display: contents;
+      visibility: visible;
+      height: 100%;
+    }
+  }
+    
+
+  .main-aside {
+    grid-area: aside;
+
+    &:empty {
+      display: none;
+    }
+  }
+

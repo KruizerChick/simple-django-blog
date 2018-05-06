@@ -1,0 +1,40 @@
+/* ==========================================================================
+   Base Mixins including Media queries
+   ========================================================================== */
+
+
+/* Large Smartphones (atVerySmall) */
+@mixin atVerySmall {
+  @media (min-width: 530px) {
+    @content;
+  }
+}
+
+/* Tablets (atSmall) */
+@mixin atSmall {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+/* Medium Desktop Screens (atMedium) */
+@mixin atMedium {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
+
+/* Large Desktop Screens (atLarge) */
+@mixin atLarge {
+  @media screen and (min-width: 1280px) {
+    @content;
+  }
+}
+
+@mixin clearfix {
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}

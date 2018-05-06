@@ -1,0 +1,100 @@
+/* =========================
+       Naviagation Bar
+   ========================= */
+
+/* Includes dropdowns */
+
+.nav-primary {
+  padding-top: 0;
+
+  ul {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    list-style: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+
+    @include atSmall {
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-content: flex-start;
+    }
+  }
+
+  ul li {
+    position: relative;
+    float: left;
+    padding-right: 20px;
+  }
+
+  ul li a {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    line-height: 2rem;
+    padding: 0 15px;
+
+    @include atSmall {
+      padding: .25rem .75rem;
+      margin: 2px;
+      background-color: transparent;
+    }
+    
+    @include atMedium {
+      font-size: 1.3rem;
+
+      &.is-current-link {
+        border-bottom: 3px solid $secondary-color-0;
+      }
+    }
+
+    &:hover {
+      border-radius: 20px;
+      background-color: rgba($secondary-color-0, 0.7);
+    }
+  }
+
+  ul li.btn--contact a.button {
+    background-color: $defBtn;
+    font-size: 1rem;
+    padding-right: 0;
+  }
+
+  /* Begin Dropdown styling */
+  ul ul {
+    display: none;
+    position: absolute;
+    background: $primary-color-2;
+    padding: 0.625rem;
+    padding-right: 0;
+  }
+  
+  ul ul li {
+    float: right;
+    min-width: 10rem;
+
+    @include atSmall {
+      float: left;
+      min-width: 15rem;
+    }
+  }
+  
+  ul ul a {
+    line-height: 120%;
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  ul ul ul {
+    top: 0;
+    left: 100%
+  }
+  
+  ul li:hover > ul {
+    display: block
+  }
+}

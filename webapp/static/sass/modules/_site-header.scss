@@ -1,0 +1,192 @@
+/* =========================
+          SITE HEADER
+   ========================= */
+/* Three sections:  Logo, Menu, Contact */
+
+.site-header {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+  transition: background-color .3s ease-out;
+  
+
+  /* Allows different header color on larger screens */
+  &--is-expanded {
+    background-color: rgba($primary-color-2, .55);
+  }
+
+  @include atSmall {
+    /* visibility: visible; */
+    flex-flow: row nowrap;
+  }
+
+  @include atMedium {
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-color-2;
+    color: #fff;
+    /* max-height: 72px; */
+
+  /* To change header colors as page is scrolled */
+    &--dark {
+      background-color: rgba($primary-color-2, .9);
+    }
+  }
+
+  /* Logo Section */
+  &__logo {
+    order: 1;
+    flex: 1 1 auto;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) scale(.8);
+    transition: transform .3s ease-out;
+    transform-origin: 50% 0%;
+
+    @include atSmall {
+      position: relative;
+      top: 0;
+      left: 0;
+      margin: 1px 0 1px 2rem;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  &__logo__graphic icon {
+    text-indent: -9999px;
+  }
+
+  /* Menu/Navigation Section */
+  &__menu {
+    order: 2;
+    flex: 2 1 auto;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+
+    @include atSmall {
+      flex-flow: row nowrap;
+    }
+  }
+
+  &__menu-content {
+    order: 2;
+    flex: 2 1 auto;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+
+    opacity: 0;
+    transform: scale(1.2);
+    transition: all .3s ease-out;
+    position: relative;
+    z-index: -10;
+    text-align: center;
+
+    @include atSmall {
+      flex-flow: row nowrap;
+    }
+
+    @include atMedium {
+      opacity: 1;
+      z-index: 1;
+      padding-top: 0;
+      transform: scale(1);
+    }
+
+    &--is-visible {
+      opacity: 1;
+      z-index: 5;
+      transform: scale(1);
+      padding: 53px 20px 0 20px;
+    }
+  }
+
+  &__menu-icon {
+    order: 2;
+    width: 20px;
+    height: 19px;
+    position: absolute;
+    z-index: 10;
+    top: 20px;
+    right: 20px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: $primary-color-2;
+      transform-origin: 0 0;
+      transition: transform .3s ease-out;
+    }
+    &__middle {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: $primary-color-2;
+      transition: all .3s ease-out;
+      transform-origin: 0 50%;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: $primary-color-2;
+      transform-origin: 0 100%;
+      transition: transform .3s ease-out;
+    }
+
+    @include atMedium {
+      display: none;
+    }
+  }
+
+  &__menu-icon--close-x {
+    &::before {
+      transform: rotate(45deg) scaleX(1.25);
+    }
+    .site-header__menu-icon__middle {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    &::after {
+      transform: rotate(-45deg) scaleX(1.25) translateY(1px);
+    }
+  }
+
+  /* Contact Section */
+  li.btn--config {
+    margin-left: 3rem;
+    padding: 0;
+
+    a:hover {
+      background: transparent;
+    }
+  }
+
+  li.btn--contact a {
+    display: none;
+
+    @include atSmall {
+      display: contents;
+    }
+  }
+}

@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Variables
+   ========================================================================== */
+
+/* ===== General ===== */
+/* Define font families */
+$fontLato   :  'Lato', sans-serif;
+$fontRaleway: 'Raleway', sans-serif;
+$fontDroid  : 'Droid Sans', sans-serif;
+
+$defaultFont: -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+
+$headerFont : $fontRaleway;
+$codeFont   : courier new, Courier, monospace;
+
+
+/* ===== Colors ===== */
+/* Slate Blue */
+$primary-color-04: #ebf5fb;
+$primary-color-03: #fbfdfe;
+$primary-color-02: #7d9cb6;
+$primary-color-01: #4F7696;
+$primary-color-0 : #315b7d;     /* Main Primary Color */
+$primary-color-1 : #1D4769;
+$primary-color-2 : #223F57;
+$primary-color-3 : #0A2F4E;
+
+/* Green Blue */
+$secondary-color-02: #85bbb9;
+$secondary-color-01: #519592;
+$secondary-color-0 : #317d79;     /* Main Secondary Color */
+$secondary-color-1 : #1c6966;
+$secondary-color-2 : #09514e;
+
+
+/* Miscellaneous Backgrounds */
+$mainBlue-dark: $primary-color-2;
+$mainBlue-hover: darken($primary-color-0, 10%);
+$mainBackground: #FFF;
+$altBackground: #f2f2f5;
+
+
+/* Buttons */
+$defBtn       : $secondary-color-01;
+$defBtn-hover : $secondary-color-02;
+$defBtn-active: $secondary-color-0;
+
+$lightBtn       : #e0e1e2;
+$lightBtn-hover : #cacbcd;
+$lightBtn-active: #babbbc;
+
+/* Notification Colors */
+$alert-success-bg    : #d4edda;
+$alert-success-border: #c3e6cb;
+$alert-warning-bg    : #fff9e7;
+$alert-warning-border: #ffe79a;
+$alert-error-bg      : #f8d7da;
+$alert-error-border  : #f5c6cb;
+$alert-info-bg       : #d1ecf1;
+$alert-info-border   : #bee5eb;
+
+
+/* Border Colors */
+$border-light: #dcd9d9;
+$border-dark : #3a3a3a;
+
+/* Text Colors */
+$heading: #374054;
+$text   : #74808a;
+$altText: #fff;
+
+/* Miscellaneous Colors */
+$form-bg: rgba(49, 91, 125, .5);
+
+
+/* Semantic UI colors (www.semantic-ui.com) */
+$red   : #B03060;
+$orange: #FE9A76;
+$yellow: #FFD700;
+$olive : #32CD32;
+$green : #016936;
+$teal  : #008080;
+$blue  : #0E6EB8;
+$violet: #EE82EE;
+$purple: #B413EC;
+$pink  : #FF1493;
+$brown : #A52A2A;
+$grey  : #A0A0A0;
+$black : #000000;
+   

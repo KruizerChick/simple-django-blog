@@ -25,8 +25,7 @@
     <div class="site-header__btn-container">
       <!-- Admin URL if User is Admin -->
       {% if request.user.is_superuser %}
-        <a href="{% url 'admin:index' %}">
-          <i class="fa fa-cog fa-lg" aria-hidden="true"></i></a>
+        <a href="{% url 'admin:index' %}"></a>
       {% endif %}
       
     </div>

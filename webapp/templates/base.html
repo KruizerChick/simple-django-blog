@@ -11,14 +11,11 @@
     <meta name="keywords" content="">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <link rel="stylesheet" href="{% static 'styles/styles.css'%}">
-    <link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css'%}">
-    
+    <link rel="stylesheet" href="{% static 'css/project.css'%}">
+        
     <!-- Google fonts -->
     <link href="https://fonts.googleapis.com/css?family=Droid+Sans|Lato:100,300,400,700" rel="stylesheet">
-    <!-- Font Awesome embed script -->
-    {% comment %} <script async src="https://use.fontawesome.com/2e7d673624.js"></script> {% endcomment %}
-    <script async src="{% static 'scripts/vendor.js'%}" type="text/javascript"></script>
+    <script async src="{% static 'js/vendors.js'%}" type="text/javascript"></script>
 
   </head>
   <body class="no-margin">
@@ -27,9 +24,9 @@
 
     {% block page-content %} {% endblock page-content %}
 
-    {% include '_nav_menu.html' %}
+    {% include '_footer.html' %}
 
-    <script async src="{% static 'scripts/app.js'%}"></script>
+    <script async src="{% static 'js/project.js'%}"></script>
 
   </body>
 </html>
