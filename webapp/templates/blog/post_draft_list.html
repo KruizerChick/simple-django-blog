@@ -11,39 +11,30 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="blog blog-draft">
-  {% for post in post_list %}
-    <div class="post-list">
-      <div class="post-header">
-        <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
-        <p class="date">Created: {{ post.created_date|date:'d-m-Y' }}</p>
-      </div>
-      <div class="post-body">
-        <p>{{ post.text|truncatechars:200 }}</p>
+  {% if post_list %}
+    <div class="blog-draft">
+      <div class="post-list">
+        {% for post in post_list %}
+          <div class="post-header">
+            <h1><a href="{% url 'blog:post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p class="date">Created: {{ post.created_date|date:'d-m-Y' }}</p>
+          </div>
+          <div class="post-body">
+            <p>{{ post.text|truncatechars:200 }}</p>
+          </div>
+          <hr>
+        {% endfor %}
       </div>
     </div>
-    <hr>
-  {% endfor %}
-</div>
+    
+  {% else %}
+    <div class="post-body">
+      <h2>{% trans 'No draft posts.' %}</h2>
+    </div>
+  {% endif %}
 {% endblock content %}
 
 <!-- Sidebar on Blog Drafts page -->
-{% block extra %}
-<div class="blog-extra">
-  <h3>Handy Links</h3>
-  <ul>
-    <li><a href="{% url 'blog:post_feed' %}"
-          title="{% trans "RSS feed of last entries" %}"
-          class="feeds">
-        {% trans "Subscribe to my RSS feed" %}
-      </a></li>
-  </ul>
-    
-  <!-- Posts with Unapproved Comments -->
-  <h3>Unapproved Comments</h3>
-  {% get_unapproved_comments %}
-    
-  <!-- Tag Cloud -->
+{% block extra-links %}
 
-</div>
-{% endblock extra %}
+{% endblock extra-links %}

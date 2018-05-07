@@ -1,0 +1,123 @@
+/* ==========================================================================
+   Page Format
+   ========================================================================== */
+
+.new-page {
+  padding: 2rem 0;
+
+  @include atMedium {
+    min-height: 90vh;
+    padding: 3rem 2rem 0 2rem;
+  }
+
+  .section-title {
+    margin-bottom: 1rem;
+  }
+
+  .flex-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+
+    @include atSmall {
+      flex-flow: row nowrap;
+    }
+
+    h2, h4 {
+      color: $mainRed;
+    }
+  }
+
+  .flex-item {
+    flex: 0 1 auto;
+    li {
+      // font-weight: 700;
+    }
+    p {
+      font-size: .9rem;
+      margin: .3rem 0;
+    }
+    .source {
+      font-style: italic;
+      font-size: .7rem;
+      margin-left: 2.5rem;
+    }
+  }
+}
+
+.page-section {
+  padding: 0 0 1.2rem 0;
+
+  @include atMedium {
+    padding: 0 0 4.5rem 0;
+  }
+
+  p {
+    color: $text;
+  }
+
+  &--no-b-until-medium {
+    padding-bottom: 0;
+
+    @include atMedium {
+      padding-bottom: 4.5rem;
+    }
+  }
+
+  &--no-b-until-large {
+    padding-bottom: 0;
+
+    @include atLarge {
+      padding-bottom: 4.5rem;
+    }
+  }
+
+  .section-title {
+    color: #FFF;
+  }
+
+}
+
+.section-title {
+  font-family: $fontDroid;
+  font-size: 3rem;
+  font-weight: 300;
+  text-align: center;
+
+  @mixin atSmall {
+      font-size: 2.55rem;
+  }
+
+  @mixin atLarge {
+      font-size: 3.25rem;
+  }
+
+  strong{
+    font-weight: 500;
+  }
+
+  &--less-margin {
+    margin-bottom: 1.3rem;
+    margin-top: 0;
+  }
+
+  &--less-b-margin {
+    margin-bottom: 1rem;
+  }
+
+  &__icon {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: .6rem;
+
+    @mixin atSmall {
+        position: relative;
+        top: 8px;
+        display: inline-block;
+        margin-left: 0;
+        margin-right: .5rem;
+        margin-bottom: 0;
+    }
+  }
+}

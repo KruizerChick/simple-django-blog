@@ -12,7 +12,6 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="blog">
   <div class="post-detail">
 
     <div class="post-header">
@@ -49,7 +48,7 @@
     <div class="post-comments">
       <hr>
       <a class="btn" href="{% url 'blog:add_comment_to_post' pk=post.pk %}">Add comment</a>
-      <a id="btnComment" class="btn btn--black" href="#popupComment">Add Comment</a>
+      <!-- {% comment %} <a id="btnComment" class="btn btn--black" href="#popupComment">Add Comment</a> {% endcomment %} -->
       {% for comment in post.comments.all %}
       <div class="container">
         {% if post.author|truncatewords:1 == user.username|truncatewords:1 or comment.approved_comment %}
@@ -60,9 +59,9 @@
               {% if not comment.approved_comment %}
                 ||
                 <a class="btn btn--red" href="{% url 'blog:comment_remove' pk=comment.pk %}">
-                    <i class="fa fa-ban" aria-hidden="true"></i></a>
+                    <i class="fa fa-ban" aria-hidden="true"></i><small>Remove</small></a>
                 <a class="btn btn--green" href="{% url 'blog:comment_approve' pk=comment.pk %}">
-                  <i class="fa fa-check" aria-hidden="true"></i></a>
+                  <i class="fa fa-check" aria-hidden="true"></i><small>Approve</small></a>
               {% endif %}
             </p>
           </div>
@@ -79,26 +78,22 @@
       
     </div>
   </div>
-</div>
 
 <!-- Popup items (hidden until called) -->
 <!-- Add Comment -->
-<div id="popupComment" class="overlay">
+<!-- {% comment %} <div id="popupComment" class="overlay">
   <div class="popup">
     <a class="popup__close" href="#">X</a>
     <div class="popup__content">
-      <div class="blog blog-form">
-        <!-- Comment Form -->
-        <h1 class=""> {{ post.title }}</h1>
-        <iframe class="blog-form" src="{% url 'blog:add_comment_to_post' pk=post.pk %}" 
-          width="100%" height="100%">
-        </iframe>
-      </div>
+      <h1 class=""> {{ post.title }}</h1>
+      <iframe class="container" src="{% url 'blog:add_comment_to_post' pk=post.pk %}" 
+        width="100%" height="100%">
+      </iframe>
+
     </div>
   </div>
-</div>
-
+</div> {% endcomment %} -->
 
 {% endblock content %}
 
-{% block extra %}{% endblock extra %}
+{% block extra-links %}{% endblock extra-links %}

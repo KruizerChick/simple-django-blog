@@ -180,6 +180,7 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+SITE_ID = 1
 
 
 # STATIC FILE CONFIGURATION
@@ -261,7 +262,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 # Options are 'mandatory', 'optional', or 'none';
 # 'mandatory' = User is blocked from logging in until the email address is verified.
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
 
 # User enters email twice during signup to avoid typos
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True

@@ -1,41 +1,41 @@
-{% comment %} {% extends 'blog/blog_base.html' %}
-{% load blog i18n %}
+<!-- {% comment %} 
+  {% extends 'blog/blog_base.html' %}
+  {% load blog i18n %}
 
-{% block blog-nav %}
-  <li><a href="{% url 'blog:post_list' %}">{% trans 'Post List' %}</a></li>
-{% endblock blog-nav %}
-  
-{% block head_title %}
-  <h2 class="section-title">New Comment</h2>
-{% endblock head_title %} 
-
-{% block content %}
-  <div class="form">
-    <h1>New comment for {{ post.title }}</h1>
+  {% block blog-nav %}
+    <li><a href="{% url 'blog:post_list' %}">{% trans 'Post List' %}</a></li>
+  {% endblock blog-nav %}
     
-    <form method="POST">
-      {% csrf_token %}
-      {{form.as_p}}
-      <button type="submit" class="btn">Post Comment</button>
-    </form>
+  {% block head_title %}
+    <h2 class="section-title">New Comment</h2>
+  {% endblock head_title %} 
 
-    <script>var editor = new MediumEditor('.editable');</script>
-  </div>
+  {% block content %}
+    <div class="form">
+      <h1>New comment for {{ post.title }}</h1>
+      
+      <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <button type="submit" class="btn">Post Comment</button>
+      </form>
 
-{% endblock content %}
-{% endcomment %}
+      <script>var editor = new MediumEditor('.editable');</script>
+    </div>
+
+  {% endblock content %}
+{% endcomment %} -->
 {% load static blog i18n %}
 
-<link rel="stylesheet" href="{% static 'styles/styles.css'%}">
-<link rel="stylesheet" href="{% static 'font-awesome/css/font-awesome.min.css'%}">
+<link rel="stylesheet" href="{% static 'css/project.css'%}">
 
-<div class="">
-    <h1>New comment</h1>
-    <form method="POST">
-      {% csrf_token %}
-      {{form.as_p}}
-      <button type="submit" class="btn">Post Comment</button>
-    </form>
+<div class="container">
+  <h1>{% trans 'New comment' %}</h1>
+  <form class="form form--popup" method="POST">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn">Post Comment</button>
+  </form>
 
-    <script>var editor = new MediumEditor('.editable');</script>
-  </div>
+  <script>var editor = new MediumEditor('.editable');</script>
+</div>

@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+
+.form {
+  background-color: $primary-color-02;
+  color: $altText;
+  padding: 0 1rem 1rem 1rem;
+  border: 1px solid black;
+  border-radius: 10px;
+
+  @include atSmall {
+    width: 30%;
+  }
+
+  @include atMedium {
+    width: 50%;
+  }
+
+  &--popup {
+
+    @include atSmall {
+      width: 70%;
+    }
+
+    @include atMedium {
+      width: 80%;
+    }
+  }
+
+  .form-header {
+    text-align: center;
+  }
+
+  /* Commented out on Dec 27 to align text on New Post form */
+  /* form {
+    text-align: center;
+  } */
+
+  h1 {
+    text-align: center;
+    color: #000;
+    font-size: 1.5rem;
+
+    @include atSmall {
+      font-size: 2rem;
+    }
+  }
+
+  a {
+    color: $primary-color-3;
+    font-weight: bold;
+    padding: 0 .3rem;
+  }
+
+  p {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-around;
+  }
+
+  input, textarea, select {
+    border-radius: 5px;
+  }
+
+  button {
+    margin: auto;
+  }
+}

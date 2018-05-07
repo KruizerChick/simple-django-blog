@@ -1,0 +1,71 @@
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn, button {
+  border-radius: 20px;
+  background-color: $primary-color-0;
+  color: $altText;
+  text-decoration: none;
+  padding: .5rem .6rem;
+  font-size: .75rem;
+  display: inline-block;
+
+  @include atMedium {
+    padding: .75rem .5rem;
+    font-size: 1rem;
+  }
+
+  @include atLarge {
+    padding: .75rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  &--light {
+    background-color: $lightBtn;
+    color: $heading;
+  }
+
+  &--green {
+    background-color: $mainGreen;
+    color: #FFF;
+  }
+
+  &--red {
+    background-color: $mainRed;
+    color: #FFF;
+  }
+  
+  &--black {
+    background-color: #414141;
+    color: #FFF;
+  }
+
+  &--large {
+    padding: 1.1rem 1.9rem;
+
+    @include atSmall {
+      font-size: 1rem;
+    }
+
+    @include atMedium {
+      font-size: 1.25rem;
+      padding: 1rem 2rem;
+    }
+  }
+
+  &--larger {
+    padding: 1rem 1rem;
+    font-size: 1rem;
+
+    @include atMedium {
+      font-size: 1.5rem;
+      padding: 1rem 2rem;
+    }
+
+    @include atLarge {
+      font-size: 2rem;
+      padding: 2rem 4rem;
+    }
+  }
+}

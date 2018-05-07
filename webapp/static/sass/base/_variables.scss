@@ -4,23 +4,30 @@
 
 /* ===== General ===== */
 /* Define font families */
-$fontLato   :  'Lato', sans-serif;
+$fontLato   : 'Lato', sans-serif;
 $fontRaleway: 'Raleway', sans-serif;
 $fontDroid  : 'Droid Sans', sans-serif;
 
-$defaultFont: -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-    'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+$defaultFont: $fontLato, sans-serif;
+// $defaultFont: -apple-system, BlinkMacSystemFont,
+//     'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
+//     'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+//     sans-serif;
 
 $headerFont : $fontRaleway;
 $codeFont   : courier new, Courier, monospace;
 
+/* Define base colors*/
+$mainBlack: #252525;
+$mainRed: #A43232; // Replace with $primary-color-2
+$mainGreen: #32a4a4;
+
 
 /* ===== Colors ===== */
 /* Slate Blue */
-$primary-color-04: #ebf5fb;
-$primary-color-03: #fbfdfe;
+$primary-color-05: #eaeef2;
+$primary-color-04: #d5dee5;
+$primary-color-03: #98adbe;
 $primary-color-02: #7d9cb6;
 $primary-color-01: #4F7696;
 $primary-color-0 : #315b7d;     /* Main Primary Color */
@@ -29,6 +36,7 @@ $primary-color-2 : #223F57;
 $primary-color-3 : #0A2F4E;
 
 /* Green Blue */
+$secondary-color-03: #accbc9;
 $secondary-color-02: #85bbb9;
 $secondary-color-01: #519592;
 $secondary-color-0 : #317d79;     /* Main Secondary Color */
@@ -39,8 +47,8 @@ $secondary-color-2 : #09514e;
 /* Miscellaneous Backgrounds */
 $mainBlue-dark: $primary-color-2;
 $mainBlue-hover: darken($primary-color-0, 10%);
-$mainBackground: #FFF;
-$altBackground: #f2f2f5;
+$mainBackground: #f2f2f2;
+$altBackground: $primary-color-02;
 
 
 /* Buttons */

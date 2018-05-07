@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load blog i18n %}
 
-{% block nav-links %}{% endblock nav-links %}
+{% block nav-links %}
+  <ul>
+    <li><a href="{% url 'blog:post_list' %}">{% trans 'Blog' %}</a></li>
+  </ul>
+{% endblock nav-links %}
 
 {% block page-content %}
 
-<div id="blog" class="new-page new-page--red page-section" data-matching-link="#blog-link">
+<div id="blog" class="new-page" data-matching-link="#blog-link">
   <!-- Blog navigation bar -->
     {% if user.is_authenticated %}
       <div class="nav-secondary">
@@ -16,10 +20,63 @@
     {% endif %}
 
     {% block head_title %} {% endblock head_title %}
-  
-  <div class="flex-container">
-      {% block content %} {% endblock content %}
-      {% block extra %}{% endblock extra %}
+  <div class="flexbox-row">
+    <div class="flex-item">
+      <div class="blog">
+        {% block content %} {% endblock content %}
+      </div>
+    </div>
+    <div class="flex-item">
+      <div class="blog-extra">
+        <!-- Sidebar on Blog List page -->
+        {% block extra %}
+        <h2 class="welcome">Welcome, {{ request.user.username }}!</h2>
+        <h3>Handy Links</h3>
+        <ul>
+          <li><a href="{% url 'blog:post_feed' %}"
+                title="{% trans "RSS feed of last entries" %}"
+                class="feeds">
+              {% trans "Subscribe to my RSS feed" %}
+            </a></li>
+          <li><a href="{% url 'account_login' %}">{% trans "Log In" %}</a></li>
+          <li><a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
+        </ul>
+        {% block extra-links %}{% endblock extra-links %}
+          
+        <!-- Tag Cloud -->
+
+        <!-- Latest Posts -->
+        <h3>Latest Posts</h3>
+        {% show_latest_posts %}
+
+        <!-- Popular Posts -->
+        <h3>Popular Posts</h3>
+        {% show_popular_posts as popular_posts %}
+        <ul>
+          {% for post in popular_posts %}
+            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></li>
+          {% endfor %}
+        </ul>
+
+        <!-- Actions Needed -->
+        {% total_draft_posts as draft_posts%}
+        {% total_unapproved_comments as unapproved_comments%}
+
+        {% if draft_posts >= 0 %}
+          <h4>Actions Needed</h4>
+          <ul>
+            <p>You have <strong>{{ draft_posts }}</strong> unpublished draft.</p>
+            <p>You have <strong>{{ unapproved_comments }}</strong> posts with unapproved comments.</p>
+          </ul>
+          
+        {% else %}
+          <p>No actions needed. You are up to date!</p>
+        {% endif %}
+
+
+        {% endblock extra %}
+      </div>
+    </div>
   </div>
 </div>
 

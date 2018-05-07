@@ -4,5 +4,6 @@ Django>=2.0
 psycopg2
 
 django-allauth
+argon2-cffi
 django-compressor
 django-taggit

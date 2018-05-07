@@ -11,16 +11,18 @@
 {% endblock head_title %}
 
 {% block content %}
-    <div class="form">
-        <h1>New post</h1>
-
-        <form method="POST" class="blog-form">
+  <div class="post-detail">
+    <form method="POST" class="blog-form">
+      <h1 class="post-header">New post</h1>
+      <fieldset class="form">
         {% csrf_token %}
         {{form.as_p}}
+        
         <button type="submit" class="btn">Save</button>
-        </form>
+      </fieldset>
+    </form>
 
-        <script>var editor = new MediumEditor('.editable');</script>
-    </div>  
+    <script>var editor = new MediumEditor('.editable');</script>
+  </div>  
 
 {% endblock content %}

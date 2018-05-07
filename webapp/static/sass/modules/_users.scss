@@ -1,0 +1,116 @@
+/* ==========================================================================
+   Users
+   ========================================================================== */
+
+.user {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  min-height: 60vh;
+
+
+  &-form {
+    background-color: $altBackground;
+    color: #fff;
+    padding: 0 1rem 1rem 1rem;
+    border: 1px solid black;
+    border-radius: 10px;
+    /* width: 30%; */
+    max-width: 60%;
+
+    .form-header {
+      text-align: center;
+    }
+
+    h1 {
+      text-align: center;
+      color: #000;
+    }
+
+    a {
+      color: $primary-color-3;
+      font-weight: bold;
+      padding: 0 .3rem;
+    }
+
+    p {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-around;
+      color: #fff;
+    }
+
+    input {
+      border-radius: 5px;
+    }
+
+    button {
+      margin: auto;
+    }
+  }
+
+  .buttonHolder {
+    margin: 1rem;
+  }
+
+  /* Styling for User action forms in general */
+  fieldset {
+    margin: 1rem 0;
+
+    legend {
+      font-size: 1.25rem;
+      font-weight: bold;
+    }
+  }
+
+  .form-group {
+    text-align: left;
+    margin: 1rem;
+    margin-bottom: 1rem;
+
+    .control-label {
+      padding: 0;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .help-block {
+      font-size: .9rem;
+      text-align: left;
+      padding-left: 2rem;
+    }
+
+    .form-control {
+      max-width: 40%;
+      line-height: 2;
+      padding: 0 1rem;
+      margin-right: 1rem;
+      border: 1px solid  $mainBlack;
+    }
+
+    select {
+      border-radius: 5px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+    }
+
+    li {
+      text-align: left;
+      list-style: none;
+    }
+  }
+
+}
+
+.user-message {
+  border: 1px solid white;
+  border-radius: 10px;
+  text-align: center;
+  margin: 0 5rem;
+  
+}
